@@ -1,2 +1,4 @@
 # Ignore file named "plan.txt"
 plan.txt
+# Ignore vscode dir ".vscode"
+.vscode
