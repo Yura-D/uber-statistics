@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from geo_info import get_geo
-from uber_api import price_eta
+from uber_api import price_eta, stat_data
 
 def _get_args():
     parser = ArgumentParser()
@@ -21,8 +21,9 @@ def main():
                         slng=start.latlng[1],
                         elat=end.latlng[0],
                         elng=end.latlng[1])
-        
-        print(eta)
+                
+        data = stat_data(eta)
+        print(data)
 
 
 if __name__ == "__main__":
