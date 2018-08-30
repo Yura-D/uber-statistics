@@ -2,3 +2,5 @@
 plan.txt
 # Ignore vscode dir ".vscode"
 .vscode
+# Ignore vscode dir "__pycache__"
+__pycache__
