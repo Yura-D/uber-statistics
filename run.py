@@ -15,12 +15,13 @@ def _get_args():
 def main():
     args = _get_args()
     start, end = get_geo(args.start, args.end)
+    print(f"Start: {start}\nEnd: {end}")
 
     if start and end:
-        eta = price_eta(slat=start.latlng[0],
-                        slng=start.latlng[1],
-                        elat=end.latlng[0],
-                        elng=end.latlng[1])
+        eta = price_eta(slat=start.latitude,
+                        slng=start.longitude,
+                        elat=end.latitude,
+                        elng=end.longitude)
                 
         data = stat_data(eta)
         print(data)
