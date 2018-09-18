@@ -1,8 +1,9 @@
 import requests
+from api_keys import uber_key
 
 
 def price_eta(slat, slng, elat, elng, check=True):
-    headers = {"Authorization": "Token %s" % "t913TouZanf6eg1DaG1jc2RAmYdZA65BZ2NkB5pE"}
+    headers = {"Authorization": "Token %s" % uber_key}
     response = requests.get(f"https://api.uber.com/v1.2/estimates/price?start_latitude={slat}\
         &start_longitude={slng}&end_latitude={elat}&end_longitude={elng}", headers=headers)
     
