@@ -1,5 +1,7 @@
 import requests
 from api_keys import uber_key
+from time import sleep
+from datetime import datetime
 
 
 def price_eta(slat, slng, elat, elng, check=True):
@@ -23,7 +25,6 @@ def price_eta(slat, slng, elat, elng, check=True):
         return eta_json
         
 
-
 def stat_data(eta):
     data = {}
     TARGET_KYES = ["distance", "high_estimate", "low_estimate", "duration", "currency_code"]
@@ -32,3 +33,21 @@ def stat_data(eta):
             data = {key: some[key] for key in TARGET_KYES}
 
     return data
+
+
+def uber_session(session, end, table, stat_data):
+    count = 0
+    while count <= end:
+        
+        data_price = table(
+            trip_param=session,
+            time=datetime.now().time(),
+            distance=data["distance"],
+            high_estimate=data["high_estimate"],
+            low_estimate=data["low_estimate"],
+            duration=data["duration"],
+        )
+        data_price.save()
+
+        count += 1
+        sleep(60)

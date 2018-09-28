@@ -1,9 +1,9 @@
 from argparse import ArgumentParser
 from geo_info import get_geo
-from uber_api import price_eta, stat_data
+from uber_api import price_eta, stat_data, uber_session
 import peewee
 from databasePSQL import TripParameters, UberPrices
-from datetime import datetime
+
 
 def _get_args():
     parser = ArgumentParser()
@@ -40,15 +40,8 @@ def main():
         end=[end.latitude, end.longitude],
         currency_code=data["currency_code"]  
     )
-    data_price = UberPrices(
-        trip_param=session,
-        time=datetime.now().time(),
-        distance=data["distance"],
-        high_estimate=data["high_estimate"],
-        low_estimate=data["low_estimate"],
-        duration=data["duration"],
-    )
-    data_price.save()
+
+    uber_session(session, 6, UberPrices, stat_data)
 
 if __name__ == "__main__":
     main()
