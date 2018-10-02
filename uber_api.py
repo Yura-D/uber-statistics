@@ -35,10 +35,11 @@ def stat_data(eta):
     return data
 
 
-def uber_session(session, end, table, stat_data):
+def uber_session(session, end, table, slat, slng, elat, elng):
     count = 0
-    while count <= end:
-        
+    while count < end:
+        eta = price_eta(slat, slng, elat, elng, check=False)
+        data = stat_data(eta)
         data_price = table(
             trip_param=session,
             time=datetime.now().time(),
@@ -50,4 +51,6 @@ def uber_session(session, end, table, stat_data):
         data_price.save()
 
         count += 1
-        sleep(60)
+
+        if count < end:
+            sleep(60)

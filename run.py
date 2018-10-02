@@ -32,6 +32,7 @@ def main():
                 
         data = stat_data(eta)
         print(data)
+
         
     session = TripParameters.create(
         addr_start=start.address,
@@ -40,8 +41,14 @@ def main():
         end=[end.latitude, end.longitude],
         currency_code=data["currency_code"]  
     )
+    print("Start")
+    uber_session(session, 20, UberPrices, 
+                        slat=start.latitude,
+                        slng=start.longitude,
+                        elat=end.latitude,
+                        elng=end.longitude)
 
-    uber_session(session, 6, UberPrices, stat_data)
+    print("End")
 
 if __name__ == "__main__":
     main()
